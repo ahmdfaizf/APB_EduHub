@@ -40,7 +40,6 @@ class _CoursePageState extends State<CoursePage> {
           final item = items[index];
           return Card(
             child: ListTile(
-              minTileHeight: 150,
               title: Text(item['title']),
               onTap: () => Navigator.pushReplacement(
         context,

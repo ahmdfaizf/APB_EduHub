@@ -30,9 +30,6 @@ class _MainPageState extends State<MainPage> {
         data: NavigationBarThemeData(
           indicatorColor: Colors.transparent,
           indicatorShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          labelTextStyle: WidgetStateProperty.all(
-            const TextStyle(fontWeight: FontWeight.w500, color: Colors.white)
-          ),
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         ),
         child: NavigationBar(
