@@ -1,4 +1,4 @@
-import 'package:edu_hub/page/main_page.dart';
+import 'package:edu_hub/page/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
       const Duration(seconds: 4),
       () => Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const MainPage()),
+        MaterialPageRoute(builder: (context) => const WelcomePage()),
       ),
     );
   }
