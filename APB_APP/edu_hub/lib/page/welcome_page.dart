@@ -16,7 +16,7 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 AppPalet.primary,
