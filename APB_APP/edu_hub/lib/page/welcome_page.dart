@@ -27,8 +27,17 @@ class _WelcomePageState extends State<WelcomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 150.0),
-                child: Image.asset("assets/LogoEduHub.png"),
-              )
+                child: Image.asset("assets/LogoEduHub.png", height: 250,),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Text("Welcome", style: TextStyle(
+                fontSize: 27,
+                color: Color.fromARGB(255 , 0, 43, 53),
+                fontWeight: FontWeight.bold
+              ),),
+              Text("HALOOOOO")
             ],
           ),
         )),
