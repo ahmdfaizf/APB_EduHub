@@ -1,6 +1,5 @@
 import 'package:edu_hub/widget/carousel.dart';
 import 'package:edu_hub/widget/circle_notif.dart';
-import 'package:edu_hub/widget/list_timeline.dart';
 import 'package:edu_hub/widget/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,11 +19,13 @@ class _HomePageState extends State<HomePage> {
     return const AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
-        body: Column(
-          children: [
-            HeaderBar(),
-            Body()
-          ],
+        body: SafeArea(
+          child:Column(
+            children: [
+              HeaderBar(),
+              Body(),
+            ],
+          ) 
         ),
       ),
     );
@@ -125,10 +126,6 @@ class Body extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 230,
-          child: ScrollableList(),
-        )
       ],
     );
   }

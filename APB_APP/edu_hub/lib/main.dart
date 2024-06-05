@@ -1,4 +1,5 @@
 // import 'package:edu_hub/page/MainPage.dart';
+import 'package:edu_hub/page/welcome_page.dart';
 import 'package:edu_hub/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      home: WelcomePage(),
     );
   }
 }
