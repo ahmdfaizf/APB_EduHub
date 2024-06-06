@@ -1,3 +1,4 @@
+import 'package:edu_hub/page/login_page.dart';
 import 'package:edu_hub/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      home: LoginPage(),
     );
   }
 }
