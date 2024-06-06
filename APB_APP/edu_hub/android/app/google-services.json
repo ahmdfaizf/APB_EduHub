@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "202543511168",
+    "project_id": "eduhub-test",
+    "storage_bucket": "eduhub-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202543511168:android:9c7f3883e58552059c1865",
+        "android_client_info": {
+          "package_name": "com.example.edu_hub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv9MZXBJKW4cJ_Ibp3Wf0tJ1j7xq6NsXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,5 @@
 import 'package:edu_hub/constant/colors.dart';
+import 'package:edu_hub/page/login_page.dart';
 import 'package:edu_hub/page/main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +46,7 @@ class _WelcomePageState extends State<WelcomePage> {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MainPage()));
+                    MaterialPageRoute(builder: (context) => LoginPage()));
               },
               child: Container(
                 height: 53,
