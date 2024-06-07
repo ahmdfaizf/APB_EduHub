@@ -1,6 +1,6 @@
 import 'package:edu_hub/page/account_page.dart';
 import 'package:edu_hub/page/course_page.dart';
-import 'package:edu_hub/page/forum_page.dart';
+import 'package:edu_hub/page/note_page.dart';
 import 'package:edu_hub/page/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class _MainPageState extends State<MainPage> {
   final screen =[
     const HomePage(),
     const CoursePage(),
-    const ForumPage(),
+    const NotePage(),
     const AccountPage()
     
   ];

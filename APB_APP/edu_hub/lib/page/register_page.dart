@@ -1,6 +1,7 @@
 import 'package:edu_hub/components/my_button.dart';
 import 'package:edu_hub/components/my_textfield.dart';
 import 'package:edu_hub/constant/colors.dart';
+import 'package:edu_hub/page/login_page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -98,7 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 onTap: registerUser,
               ),
               const SizedBox(height: 25),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
                   children: [
@@ -108,9 +109,17 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Colors.black,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text('or Logs In here'),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Text('or Log In here'),
+                      ),
                     ),
                     Expanded(
                       child: Divider(
