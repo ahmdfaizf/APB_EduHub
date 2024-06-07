@@ -1,7 +1,6 @@
 import 'package:edu_hub/firebase_options.dart';
-import 'package:edu_hub/page/note_page.dart';
-import 'package:edu_hub/page/register_page.dart';
-import 'package:edu_hub/splash_page.dart';
+import 'package:edu_hub/page/main_page.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +13,6 @@ void main() async {
       const MyApp(),
     ),
   );
-  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,9 +20,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      home: const MainPage(),
+      theme: ThemeData(fontFamily: 'sf-ui-display'),
     );
   }
 }

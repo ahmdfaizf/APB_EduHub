@@ -100,10 +100,10 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 25),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Divider(
                         thickness: 0.5,
                         color: Colors.black,
@@ -116,12 +116,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             MaterialPageRoute(
                                 builder: (context) => LoginPage()));
                       },
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text('or Log In here'),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Divider(
                         thickness: 0.5,
                         color: Colors.black,

@@ -3,7 +3,6 @@ import 'package:edu_hub/components/my_textfield.dart';
 import 'package:edu_hub/constant/colors.dart';
 import 'package:edu_hub/page/register_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -92,10 +91,10 @@ class LoginPage extends StatelessWidget {
 
               // Sign up
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Divider(
                         thickness: 0.5,
                         color: Colors.black,
@@ -106,14 +105,14 @@ class LoginPage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RegisterPage()));
+                                builder: (context) => const RegisterPage()));
                       },
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text('or Sign Up here'),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Divider(
                         thickness: 0.5,
                         color: Colors.black,

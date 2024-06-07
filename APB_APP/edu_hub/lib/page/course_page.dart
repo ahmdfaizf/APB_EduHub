@@ -1,3 +1,4 @@
+import 'package:edu_hub/constant/colors.dart';
 import 'package:edu_hub/page/main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,14 @@ class _CoursePageState extends State<CoursePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 50,
+        backgroundColor: AppPalet.primary,
+        title: const Text("Course", style:TextStyle(
+          color: AppPalet.secondary,
+          fontWeight: FontWeight.bold,
+        )),
+      ),
       body: SafeArea(
         child: ListView.builder(
         itemCount: items.length,

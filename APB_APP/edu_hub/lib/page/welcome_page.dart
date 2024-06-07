@@ -1,6 +1,5 @@
 import 'package:edu_hub/constant/colors.dart';
 import 'package:edu_hub/page/login_page.dart';
-import 'package:edu_hub/page/main_page.dart';
 import 'package:edu_hub/page/register_page.dart';
 import 'package:flutter/material.dart';
 

@@ -20,6 +20,18 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  fonts:
+    - family: sf-ui-display
+      fonts:
+        - asset: fonts/sf-ui-display-black.otf
+        - asset: fonts/sf-ui-display-bold.otf
+        - asset: fonts/sf-ui-display-heavy.otf
+        - asset: fonts/sf-ui-display-light.otf
+        - asset: fonts/sf-ui-display-medium.otf
+        - asset: fonts/sf-ui-display-semibold.otf
+        - asset: fonts/sf-ui-display-thin.otf
+        - asset: fonts/sf-ui-display-ultralight.otf
+    - family: Times New Roman
   uses-material-design: true
   assets:
     - assets/LogoEduHub.png
