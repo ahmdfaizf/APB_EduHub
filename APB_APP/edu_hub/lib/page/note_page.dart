@@ -34,8 +34,8 @@ class _NotePageState extends State<NotePage> {
               Navigator.pop(context);
             },
             style: const ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(AppPalet.primary),
-              textStyle: MaterialStatePropertyAll(TextStyle(color: AppPalet.secondary))
+              backgroundColor: WidgetStatePropertyAll(AppPalet.primary),
+              textStyle: WidgetStatePropertyAll(TextStyle(color: AppPalet.secondary))
             ),
             child: const Text("add", style: TextStyle(
               color: AppPalet.secondary

@@ -1,18 +1,48 @@
 import 'package:edu_hub/components/my_button.dart';
 import 'package:edu_hub/components/my_textfield.dart';
 import 'package:edu_hub/constant/colors.dart';
+import 'package:edu_hub/helper/helper_function.dart';
+import 'package:edu_hub/page/main_page.dart';
 import 'package:edu_hub/page/register_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   //text editing controllers
   final usernameController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   //sign user in method (masih kosong karena baru UI)
-  void signUserIn() {}
+  void signUserIn() async {
+    showDialog(
+      context: context, 
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      )
+    );
+
+    try{
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: usernameController.text, 
+        password: passwordController.text);
+
+        if (context.mounted){
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => const MainPage()));
+        }
+    }on FirebaseAuthException catch(e){
+      Navigator.pop(context);
+      displayMessageToUser(e.code, context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +113,7 @@ class LoginPage extends StatelessWidget {
               // sign in button
               MyButton(
                 onTap: signUserIn,
+                namaButton: "Log In",
               ),
 
               const SizedBox(

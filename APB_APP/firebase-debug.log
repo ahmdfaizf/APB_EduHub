@@ -1,0 +1,16 @@
+[debug] [2024-06-08T12:18:11.922Z] ----------------------------------------------------------------------
+[debug] [2024-06-08T12:18:11.932Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\ahmdf\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login
+[debug] [2024-06-08T12:18:11.934Z] CLI Version:   13.11.0
+[debug] [2024-06-08T12:18:11.935Z] Platform:      win32
+[debug] [2024-06-08T12:18:11.935Z] Node Version:  v18.17.1
+[debug] [2024-06-08T12:18:11.948Z] Time:          Sat Jun 08 2024 19:18:11 GMT+0700 (Western Indonesia Time)
+[debug] [2024-06-08T12:18:11.949Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-06-08T12:18:11.954Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[info] Already logged in as fadillahfaiz87@gmail.com
+[debug] [2024-06-08T12:18:22.134Z] Error: Timed out.
+    at Timeout._onTimeout (C:\Users\ahmdf\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:267:49)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+[error] 
+[error] Error: An unexpected error has occurred.

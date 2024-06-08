@@ -1,5 +1,5 @@
 import 'package:edu_hub/firebase_options.dart';
-import 'package:edu_hub/page/main_page.dart';
+import 'package:edu_hub/splash_page.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const MainPage(),
+      home: const SplashPage(),
       theme: ThemeData(fontFamily: 'sf-ui-display'),
     );
   }

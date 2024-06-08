@@ -72,4 +72,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'eduhub-test.appspot.com',
     iosBundleId: 'com.example.eduHub',
   );
+
 }
