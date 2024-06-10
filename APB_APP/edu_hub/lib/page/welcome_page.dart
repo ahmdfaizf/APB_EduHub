@@ -46,7 +46,7 @@ class _WelcomePageState extends State<WelcomePage> {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
               },
               child: Container(
                 height: 53,

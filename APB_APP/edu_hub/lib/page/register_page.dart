@@ -41,12 +41,15 @@ class _RegisterPageState extends State<RegisterPage> {
       // Lakukan sesuatu setelah user berhasil didaftarkan
       // Contoh: Navigator.pushNamed(context, '/home');
 
+      // ignore: use_build_context_synchronously
       Navigator.push(context, MaterialPageRoute(
-        builder: (context) => LoginPage()
+        builder: (context) => const LoginPage()
         )
       );
     } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
+      // ignore: use_build_context_synchronously
       displayMessageToUser(e.code, context);
     }
   }
@@ -156,7 +159,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()));
+                                builder: (context) => const LoginPage()));
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.0),

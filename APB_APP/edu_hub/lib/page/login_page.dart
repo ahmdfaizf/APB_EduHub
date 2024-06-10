@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   void signUserIn() async {
     showDialog(
       context: context, 
-      builder: (context) => Center(
+      builder: (context) => const Center(
         child: CircularProgressIndicator(),
       )
     );
@@ -35,11 +35,14 @@ class _LoginPageState extends State<LoginPage> {
         password: passwordController.text);
 
         if (context.mounted){
+          // ignore: use_build_context_synchronously
           Navigator.push(context, MaterialPageRoute(
             builder: (context) => const MainPage()));
         }
     }on FirebaseAuthException catch(e){
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
+      // ignore: use_build_context_synchronously
       displayMessageToUser(e.code, context);
     }
   }

@@ -34,8 +34,8 @@ class _NotePageState extends State<NotePage> {
               Navigator.pop(context);
             },
             style: const ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(AppPalet.primary),
-              textStyle: WidgetStatePropertyAll(TextStyle(color: AppPalet.secondary))
+              backgroundColor: MaterialStatePropertyAll(AppPalet.primary),
+              textStyle: MaterialStatePropertyAll(TextStyle(color: AppPalet.secondary))
             ),
             child: const Text("add", style: TextStyle(
               color: AppPalet.secondary
@@ -49,14 +49,14 @@ class _NotePageState extends State<NotePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 50,
-        backgroundColor: AppPalet.primary,
-        title: const Text("Notes", style:TextStyle(
-          color: AppPalet.secondary,
-          fontWeight: FontWeight.bold,
-        )),
-      ),
+      // appBar: AppBar(
+      //   toolbarHeight: 50,
+      //   backgroundColor: AppPalet.primary,
+      //   title: const Text("Notes", style:TextStyle(
+      //     color: AppPalet.secondary,
+      //     fontWeight: FontWeight.bold,
+      //   )),
+      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => openNoteBox(context),
         backgroundColor: AppPalet.primary,
