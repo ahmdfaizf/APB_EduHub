@@ -24,7 +24,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   void dispose() {
     widget.controller.removeListener(_listener);
-    // Do not dispose the controller here to keep it alive
     super.dispose();
   }
 
@@ -48,16 +47,14 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             ),
             Expanded(
               child: Center(
-                child: // Check if controller is ready
-                     AspectRatio(
-                        aspectRatio: 16 / 9, // Manually setting the aspect ratio
-                        child: YoutubePlayer(
-                          controller: widget.controller,
-                          showVideoProgressIndicator: true,
-                          progressIndicatorColor: Colors.amber,
-                        ),
-                     )
-                    , // Show a progress indicator while loading
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: YoutubePlayer(
+                    controller: widget.controller,
+                    showVideoProgressIndicator: true,
+                    progressIndicatorColor: Colors.amber,
+                  ),
+                ),
               ),
             ),
           ],

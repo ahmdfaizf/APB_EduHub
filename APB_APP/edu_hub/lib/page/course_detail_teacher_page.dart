@@ -1,25 +1,99 @@
+import 'package:edu_hub/constant/colors.dart';
 import 'package:edu_hub/page/course_quiz_page.dart';
 import 'package:edu_hub/page/course_video_page.dart';
-import 'package:edu_hub/page/main_page.dart';
+import 'package:edu_hub/page/main_teacher_page.dart';
 import 'package:edu_hub/services/firestore_course.dart';
 import 'package:flutter/material.dart';
 
-class CourseDetailPage extends StatefulWidget {
+class CourseDetailTeacherPage extends StatefulWidget {
   final String courseId;
 
-  const CourseDetailPage({super.key, required this.courseId});
+  const CourseDetailTeacherPage({super.key, required this.courseId});
 
   @override
-  State<CourseDetailPage> createState() => _CourseDetailPageState();
+  State<CourseDetailTeacherPage> createState() => _CourseDetailTeacherPageState();
 }
 
-class _CourseDetailPageState extends State<CourseDetailPage> {
+class _CourseDetailTeacherPageState extends State<CourseDetailTeacherPage> {
   int idx = 0;
   late final List<Widget> screens;
   final FirestoreCourseService _firestoreService = FirestoreCourseService();
   String _judul = 'Loading...';
   String _deskripsi = 'Loading...';
-  String _urlGambar = '';
+  String _urlGambar = '';  // Tambahkan field untuk URL gambar
+
+  final TextEditingController judulController = TextEditingController();
+  final TextEditingController vidUrlController = TextEditingController(); // Mengubah nama controller
+  final TextEditingController deskripsiController = TextEditingController();
+
+  void openNoteBox(BuildContext context, {String? docIDs}) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: judulController,
+              decoration: const InputDecoration(
+                hintText: 'Enter title',
+              ),
+            ),
+            TextField(
+              controller: vidUrlController,
+              decoration: const InputDecoration(
+                hintText: 'Enter video URL', // Mengubah hint text
+              ),
+            ),
+            TextField(
+              controller: deskripsiController,
+              decoration: const InputDecoration(
+                hintText: 'Enter description',
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              if (docIDs == null) {
+                _firestoreService.createVideo(
+                  widget.courseId,
+                  vidUrlController.text,
+                  judulController.text,
+                  deskripsiController.text,
+                );
+              } else {
+                _firestoreService.updateVideo(
+                  widget.courseId,
+                  docIDs,
+                  vidUrlController.text,
+                  judulController.text,
+                  deskripsiController.text,
+                );
+              }
+              vidUrlController.clear();
+              judulController.clear();
+              deskripsiController.clear();
+              Navigator.pop(context);
+            },
+            style: const ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(AppPalet.primary),
+              textStyle: MaterialStatePropertyAll(
+                TextStyle(color: AppPalet.secondary),
+              ),
+            ),
+            child: const Text(
+              "add",
+              style: TextStyle(
+                color: AppPalet.secondary,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -36,13 +110,21 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
     setState(() {
       _judul = course.judul;
       _deskripsi = course.deskripsi;
-      _urlGambar = course.urlGambar;
+      _urlGambar = course.urlGambar;  // Set URL gambar dari data course
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => openNoteBox(context),
+        backgroundColor: AppPalet.primary,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -66,7 +148,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const MainPage(),
+                            builder: (context) => const MainTeacherPage(),
                           ),
                         );
                       },

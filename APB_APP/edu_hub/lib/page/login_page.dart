@@ -3,8 +3,8 @@ import 'package:edu_hub/components/my_button.dart';
 import 'package:edu_hub/components/my_textfield.dart';
 import 'package:edu_hub/constant/colors.dart';
 import 'package:edu_hub/helper/helper_function.dart';
-import 'package:edu_hub/page/home_teacher_page.dart';
 import 'package:edu_hub/page/main_page.dart';
+import 'package:edu_hub/page/main_teacher_page.dart';
 import 'package:edu_hub/page/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -49,31 +49,38 @@ class _LoginPageState extends State<LoginPage> {
           // Get user role
           String role = userDoc['role'];
           // Remove the loading indicator
+          // ignore: use_build_context_synchronously
           Navigator.pop(context);
           
           // Navigate to the corresponding page based on user role
           if (role == 'Teacher') {
             Navigator.pushReplacement(
+              // ignore: use_build_context_synchronously
               context,
-              MaterialPageRoute(builder: (context) => const HomeTeacherPage()),
+              MaterialPageRoute(builder: (context) => const MainTeacherPage()),
             );
           } else {
             Navigator.pushReplacement(
+              // ignore: use_build_context_synchronously
               context,
               MaterialPageRoute(builder: (context) => const MainPage()),
             );
           }
         } else {
           // Remove the loading indicator
+          // ignore: use_build_context_synchronously
           Navigator.pop(context);
           // If user data is not found
+          // ignore: use_build_context_synchronously
           displayMessageToUser('User data not found', context);
         }
       }
     } on FirebaseAuthException catch (e) {
       // Remove the loading indicator
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
       // Display error message to the user
+      // ignore: use_build_context_synchronously
       displayMessageToUser(e.message ?? 'An error occurred', context);
     }
   }

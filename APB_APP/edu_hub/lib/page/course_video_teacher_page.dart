@@ -3,16 +3,16 @@ import 'package:edu_hub/services/firestore_course.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class CourseVideoPage extends StatefulWidget {
+class CourseVideoTeacherPage extends StatefulWidget {
   final String courseId;
 
-  const CourseVideoPage({super.key, required this.courseId});
+  const CourseVideoTeacherPage({super.key, required this.courseId});
 
   @override
-  State<CourseVideoPage> createState() => _CourseVideoPageState();
+  State<CourseVideoTeacherPage> createState() => _CourseVideoTeacherPageState();
 }
 
-class _CourseVideoPageState extends State<CourseVideoPage> {
+class _CourseVideoTeacherPageState extends State<CourseVideoTeacherPage> {
   final FirestoreCourseService _firestoreService = FirestoreCourseService();
   List<Map<String, dynamic>> _videos = [];
   late Map<String, YoutubePlayerController> _videoControllers = {};
