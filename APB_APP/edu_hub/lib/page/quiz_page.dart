@@ -1,12 +1,13 @@
-import 'package:edu_hub/page/main_page.dart';
+import 'package:edu_hub/page/course_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class QuizPage extends StatefulWidget {
   final Map<String, dynamic> quizData;
 
-  const QuizPage({Key? key, required this.quizData}) : super(key: key);
+  const QuizPage({super.key, required this.quizData});
 
   @override
+  // ignore: library_private_types_in_public_api
   _QuizPageState createState() => _QuizPageState();
 }
 
@@ -49,11 +50,11 @@ class _QuizPageState extends State<QuizPage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MainPage(), 
+                      builder: (context) => const CourseDetailPage(), 
                     ),
                   );
                 },
-                child: Text('Back'),
+                child: const Text('Back'),
               ),
             ],
           );
@@ -79,14 +80,14 @@ class _QuizPageState extends State<QuizPage> {
           children: [
             Text(
               'Pertanyaan ${_currentQuestion + 1}/${_questions.length}',
-              style: TextStyle(fontSize: 18.0),
+              style: const TextStyle(fontSize: 18.0),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               _questions[_currentQuestion]['question'],
-              style: TextStyle(fontSize: 24.0),
+              style: const TextStyle(fontSize: 24.0),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ..._questions[_currentQuestion]['options']
                 .map(
                   (option) => ElevatedButton(

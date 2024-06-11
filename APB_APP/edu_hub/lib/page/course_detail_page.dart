@@ -1,5 +1,6 @@
 import 'package:edu_hub/page/course_quiz_page.dart';
 import 'package:edu_hub/page/course_video_page.dart';
+import 'package:edu_hub/page/main_page.dart';
 import 'package:flutter/material.dart';
 
 class CourseDetailPage extends StatefulWidget {
@@ -24,11 +25,23 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
           children: [
             Container(
               color: Colors.blueGrey,
-              child: const Padding(
-                padding: EdgeInsets.all(30.0),
+              child: Padding(
+                padding: const EdgeInsets.all(50.0),
                 child: Column(
                   children: [
-                    Text(
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MainPage()));
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Icon(Icons.arrow_back_ios_new),
+                      ),
+                    ),
+                    const Text(
                       'DART COURSE',
                       style: TextStyle(
                         color: Colors.white,
@@ -36,14 +49,14 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       'Learn About Dart and Start Develop Mobile Project',
                       style: TextStyle(
                         color: Colors.white, // fontSize: 16.0,
                       ),
                     ),
-                    SizedBox(height: 60.0)
+                    const SizedBox(height: 60.0)
                   ],
                 ),
               ),

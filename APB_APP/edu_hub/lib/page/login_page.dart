@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_hub/components/my_button.dart';
 import 'package:edu_hub/components/my_textfield.dart';
 import 'package:edu_hub/constant/colors.dart';
 import 'package:edu_hub/helper/helper_function.dart';
+import 'package:edu_hub/page/home_teacher_page.dart';
 import 'package:edu_hub/page/main_page.dart';
 import 'package:edu_hub/page/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,35 +17,64 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  //text editing controllers
+  // Text editing controllers
   final usernameController = TextEditingController();
-
   final passwordController = TextEditingController();
 
-  //sign user in method (masih kosong karena baru UI)
+  // Sign in method
   void signUserIn() async {
     showDialog(
-      context: context, 
+      context: context,
       builder: (context) => const Center(
         child: CircularProgressIndicator(),
-      )
+      ),
     );
 
-    try{
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: usernameController.text, 
-        password: passwordController.text);
+    try {
+      // Sign in with email and password
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: usernameController.text.trim(),
+        password: passwordController.text.trim(),
+      );
 
-        if (context.mounted){
-          // ignore: use_build_context_synchronously
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) => const MainPage()));
+      User? user = userCredential.user;
+      if (user != null) {
+        // Get user data from Firestore
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('userCredential')
+            .doc(user.uid)
+            .get();
+
+        if (userDoc.exists) {
+          // Get user role
+          String role = userDoc['role'];
+          // Remove the loading indicator
+          Navigator.pop(context);
+          
+          // Navigate to the corresponding page based on user role
+          if (role == 'Teacher') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeTeacherPage()),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const MainPage()),
+            );
+          }
+        } else {
+          // Remove the loading indicator
+          Navigator.pop(context);
+          // If user data is not found
+          displayMessageToUser('User data not found', context);
         }
-    }on FirebaseAuthException catch(e){
-      // ignore: use_build_context_synchronously
+      }
+    } on FirebaseAuthException catch (e) {
+      // Remove the loading indicator
       Navigator.pop(context);
-      // ignore: use_build_context_synchronously
-      displayMessageToUser(e.code, context);
+      // Display error message to the user
+      displayMessageToUser(e.message ?? 'An error occurred', context);
     }
   }
 
@@ -61,13 +92,13 @@ class _LoginPageState extends State<LoginPage> {
           ])),
           child: Column(
             children: <Widget>[
-              // logo
+              // Logo
               Image.asset(
                 "assets/LogoEduHub.png",
                 height: 250,
               ),
 
-              // welcome text
+              // Welcome text
               const Text('Welcome to EduHub',
                   style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0), fontSize: 20)),
@@ -76,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 25,
               ),
 
-              // uname textfield
+              // Username textfield
               MyTextField(
                 controller: usernameController,
                 hintText: 'Username',
@@ -87,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 15,
               ),
 
-              // password textfield
+              // Password textfield
               MyTextField(
                 controller: passwordController,
                 hintText: 'Password',
@@ -98,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
 
-              // forgot password?
+              // Forgot password?
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
@@ -113,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 25,
               ),
 
-              // sign in button
+              // Sign in button
               MyButton(
                 onTap: signUserIn,
                 namaButton: "Log In",

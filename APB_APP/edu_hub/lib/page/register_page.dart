@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_hub/components/my_button.dart';
 import 'package:edu_hub/components/my_textfield.dart';
 import 'package:edu_hub/constant/colors.dart';
@@ -22,38 +23,47 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void registerUser() async {
     showDialog(
-    context: context,
-    builder: (context) => const Center(
-      child: CircularProgressIndicator(),
-    )
-  );
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      )
+    );
 
-  if (passwordController.text != confirmPasswordController.text) {
-    Navigator.pop(context);
-    displayMessageToUser("Password don't match !", context);
-  } else {
-    try {
-      UserCredential? userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text
-      );
-
-      // Lakukan sesuatu setelah user berhasil didaftarkan
-      // Contoh: Navigator.pushNamed(context, '/home');
-
-      // ignore: use_build_context_synchronously
-      Navigator.push(context, MaterialPageRoute(
-        builder: (context) => const LoginPage()
-        )
-      );
-    } on FirebaseAuthException catch (e) {
-      // ignore: use_build_context_synchronously
+    if (passwordController.text != confirmPasswordController.text) {
       Navigator.pop(context);
-      // ignore: use_build_context_synchronously
-      displayMessageToUser(e.code, context);
+      displayMessageToUser("Password don't match !", context);
+    } else {
+      try {
+        UserCredential? userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text
+        );
+
+        User? user = userCredential.user;
+        if (user != null) {
+          FirebaseFirestore.instance.collection('userCredential').doc(user.uid).set({
+            'uid': user.uid,
+            'e-mail': emailController.text,
+            'name': nameController.text,
+            'phone': phoneController.text,
+            'role': selectedRole,
+            'timestamp': Timestamp.now(),
+          });
+
+          // ignore: use_build_context_synchronously
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage())
+          );
+        }
+      } on FirebaseAuthException catch (e) {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        displayMessageToUser(e.message ?? 'An error occurred', context);
+      }
     }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -112,30 +122,28 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 15),
               SizedBox(
                 width: 360,
-                child: Expanded(
-                  child: DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(
-                      hintText: 'Role',
-                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                      border: OutlineInputBorder(),
-                    ),
-                    value: selectedRole,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedRole = newValue;
-                      });
-                    },
-                    items: const [
-                      DropdownMenuItem(
-                        value: 'Student',
-                        child: Text('Student'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Teacher',
-                        child: Text('Teacher'),
-                      ),
-                    ],
+                child: DropdownButtonFormField<String>(
+                  decoration: const InputDecoration(
+                    hintText: 'Role',
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    border: OutlineInputBorder(),
                   ),
+                  value: selectedRole,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedRole = newValue;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'Student',
+                      child: Text('Student'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Teacher',
+                      child: Text('Teacher'),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 25),

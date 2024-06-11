@@ -1,5 +1,6 @@
-import 'package:edu_hub/page/main_page.dart';
+import 'package:edu_hub/page/video_player_page.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CourseVideoPage extends StatefulWidget {
   const CourseVideoPage({super.key});
@@ -15,39 +16,12 @@ class _CourseVideoPageState extends State<CourseVideoPage> {
       'title': 'Video 1',
       'description': 'Setup Language',
       'image': 'assets/LogoEduHub.png',
+      'videoUrl': 'https://www.youtube.com/watch?v=-9Bf7uh0VNw',
       'checked': false
     },
-    {
-      'id': 2,
-      'title': 'Video 2',
-      'description': 'HELLO WORLD',
-      'image': 'assets/LogoEduHub.png',
-      'checked': true
-    },
-    {
-      'id': 3,
-      'title': 'Video 3',
-      'description': 'Start Using Framework',
-      'image': 'assets/LogoEduHub.png',
-      'checked': true
-    },
-    {
-      'id': 4,
-      'title': 'Video 4',
-      'description': 'Hello Flutter',
-      'image': 'assets/LogoEduHub.png',
-      'checked': true
-    },
-    {
-      'id': 5,
-      'title': 'Video 5',
-      'description': 'Build a Complex Project With Flutter',
-      'image': 'assets/LogoEduHub.png',
-      'checked': true
-    },
-
-    // Add more items here
   ];
+
+  late Map<int, YoutubePlayerController> videoControllers = {};
 
   void toggleChecked(int id) {
     setState(() {
@@ -58,6 +32,28 @@ class _CourseVideoPageState extends State<CourseVideoPage> {
         return item;
       }).toList();
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    for (var item in items) {
+      final youtubeVideoId = YoutubePlayer.convertUrlToId(item['videoUrl'])!;
+      videoControllers[item['id']] = YoutubePlayerController(
+        initialVideoId: youtubeVideoId,
+        flags: const YoutubePlayerFlags(
+          autoPlay: false, // Set autoPlay to false by default
+        ),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    for (var controller in videoControllers.values) {
+      controller.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -75,9 +71,10 @@ class _CourseVideoPageState extends State<CourseVideoPage> {
                 title: Text(item['title']),
                 subtitle: Text(item['description']),
                 trailing: IconButton(
-                  icon: Icon(Icons.arrow_drop_down),
+                  icon: const Icon(Icons.arrow_drop_down),
                   onPressed: () {
                     showModalBottomSheet(
+                      backgroundColor: Colors.blueGrey,
                       context: context,
                       isDismissible: true,
                       isScrollControlled: true,
@@ -86,50 +83,17 @@ class _CourseVideoPageState extends State<CourseVideoPage> {
                         minChildSize: 0.75,
                         initialChildSize: 0.75,
                         expand: false,
-                        builder: (context, scrollController) =>
-                            VideoPlayerPage(),
+                        builder: (context, scrollController) => VideoPlayerPage(
+                          controller: videoControllers[item['id']]!,
+                        ),
                       ),
                     );
                   },
                 ),
-                onTap: () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MainPage()),
-                ),
+                onTap: null,
               ),
             );
           },
-        ),
-      ),
-    );
-  }
-}
-
-class VideoPlayerPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            Expanded(
-              child: Center(
-                child: Text(
-                  'Video Player',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ],
         ),
       ),
     );
