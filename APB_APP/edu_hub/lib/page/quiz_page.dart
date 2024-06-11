@@ -1,7 +1,4 @@
-import 'package:edu_hub/page/course_detail_page.dart';
-import 'package:edu_hub/page/course_quiz_page.dart'; // Impor file course_quiz_page.dart
-import 'package:edu_hub/page/home_page.dart';
-import 'package:edu_hub/page/welcome_page.dart';
+import 'package:edu_hub/page/course_detail_page.dart';// Impor file course_quiz_page.dart
 import 'package:flutter/material.dart';
 
 class QuizPage extends StatefulWidget {
@@ -18,7 +15,7 @@ class _QuizPageState extends State<QuizPage> {
   int _score = 0;
 
   // Data pertanyaan dan jawaban
-  List<Map<String, dynamic>> _questions = [
+  final List<Map<String, dynamic>> _questions = [
     {
       'question': 'Contoh soal nomor 1',
       'options': ['Opsi A', 'Opsi B', 'Opsi C', 'Opsi D', 'Opsi E'],
@@ -43,7 +40,7 @@ class _QuizPageState extends State<QuizPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Skor Akhir'),
+            title: const Text('Skor Akhir'),
             content: Text('Skor Anda: $_score/${_questions.length}'),
             actions: [
               TextButton(

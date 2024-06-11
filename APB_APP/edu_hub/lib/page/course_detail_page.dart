@@ -67,7 +67,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                     label: 'Video',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.download, color: Colors.black),
+                    icon: Icon(Icons.quiz, color: Colors.black),
                     label: 'Quiz',
                   ),
                 ],
