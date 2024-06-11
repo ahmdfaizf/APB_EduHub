@@ -1,4 +1,4 @@
-import 'package:edu_hub/page/main_page.dart';
+import 'package:edu_hub/page/quiz_page.dart';
 import 'package:flutter/material.dart';
 
 class CourseQuizPage extends StatefulWidget {
@@ -45,7 +45,6 @@ class _CourseQuizPageState extends State<CourseQuizPage> {
       'image': 'assets/LogoEduHub.png',
       'checked': true
     },
-
     // Add more items here
   ];
 
@@ -62,27 +61,28 @@ class _CourseQuizPageState extends State<CourseQuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            final item = items[index];
-            return Card(
-              color: Colors.white70,
-              child: ListTile(
-                leading: Image.asset(item['image']),
-                title: Text(item['title']),
-                subtitle: Text(item['description']),
-                onTap: () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MainPage()),
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
+        return Card(
+          color: Colors.white70,
+          child: ListTile(
+            leading: Image.asset(item['image']),
+            title: Text(item['title']),
+            subtitle: Text(item['description']),
+            onTap: () {
+              // Navigasi ke halaman QuizPage dengan data kuis
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => QuizPage(quizData: item),
                 ),
-              ),
-            );
-          },
-        ),
-      ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
