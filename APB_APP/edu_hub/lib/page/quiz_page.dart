@@ -1,6 +1,7 @@
 import 'package:edu_hub/page/course_detail_page.dart';
 import 'package:edu_hub/page/course_quiz_page.dart'; // Impor file course_quiz_page.dart
 import 'package:edu_hub/page/home_page.dart';
+import 'package:edu_hub/page/main_page.dart';
 import 'package:edu_hub/page/welcome_page.dart';
 import 'package:flutter/material.dart';
 
@@ -52,11 +53,11 @@ class _QuizPageState extends State<QuizPage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CourseDetailPage(), // Navigasi ke CourseQuizPage
+                      builder: (context) => MainPage(), 
                     ),
                   );
                 },
-                child: Text('Back to Course'),
+                child: Text('Back'),
               ),
             ],
           );
