@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_hub/models/course_model.dart';
+import 'package:edu_hub/models/quiz_model.dart';
 
 class FirestoreCourseService {
   final CollectionReference _courseCollection =
@@ -110,6 +111,121 @@ class FirestoreCourseService {
           .delete();
     // ignore: empty_catches
     } catch (e) {
+    }
+  }
+
+   Stream<QuerySnapshot> getQuizzes(String courseId) {
+    return _courseCollection
+        .doc(courseId)
+        .collection('Quizzes')
+        .orderBy('timestamp', descending: true) // Urutkan berdasarkan waktu pembuatan
+        .snapshots();
+  }
+
+  // Metode untuk membuat kuis baru
+  Future<void> createQuiz(String courseId, QuizModel quiz) async {
+    try {
+      await _courseCollection
+          .doc(courseId)
+          .collection('Quizzes')
+          .add(quiz.toJson());
+    } catch (e) {
+      print("Error creating quiz: $e");
+    }
+  }
+
+  Future<void> updateQuiz(
+    String courseId,
+    String quizId,
+    QuizModel updatedQuizModel,
+  ) async {
+    try {
+      await _courseCollection
+          .doc(courseId)
+          .collection('Quiz')
+          .doc(quizId)
+          .update(updatedQuizModel.toJson());
+    } catch (e) {
+      print("Error updating quiz: $e");
+    }
+  }
+
+  Future<void> deleteQuiz(String courseId, String quizId) async {
+    try {
+      await _courseCollection
+          .doc(courseId)
+          .collection('Quiz')
+          .doc(quizId)
+          .delete();
+    } catch (e) {
+      print("Error deleting quiz: $e");
+    }
+  }
+
+  // CRUD untuk Soal
+  Future<void> createSoal(
+    String courseId,
+    String quizId,
+    QuizModel soalModel,
+  ) async {
+    try {
+      await _courseCollection
+          .doc(courseId)
+          .collection('Quiz')
+          .doc(quizId)
+          .collection('Soal')
+          .add(soalModel.toJson());
+    } catch (e) {
+      print("Error creating soal: $e");
+    }
+  }
+
+  Stream<QuerySnapshot> getSoals(String courseId, String quizId) {
+    final soalStream = _courseCollection
+        .doc(courseId)
+        .collection('Quiz')
+        .doc(quizId)
+        .collection('Soal')
+        .orderBy('pertanyaan', descending: true)
+        .snapshots();
+
+    return soalStream;
+  }
+
+  Future<void> updateSoal(
+    String courseId,
+    String quizId,
+    String soalId,
+    QuizModel updatedSoalModel,
+  ) async {
+    try {
+      await _courseCollection
+          .doc(courseId)
+          .collection('Quiz')
+          .doc(quizId)
+          .collection('Soal')
+          .doc(soalId)
+          .update(updatedSoalModel.toJson());
+    } catch (e) {
+      print("Error updating soal: $e");
+    }
+  }
+
+  Future<void> deleteSoal(
+    String courseId,
+    String quizId,
+    String soalId,
+  ) async {
+    try {
+      await _courseCollection
+          .doc(courseId)
+          .collection('Quiz')
+          .doc(quizId)
+          .collection('Soal')
+          .doc(soalId)
+          .delete();
+    } catch (e) {
+      print("Error deleting soal: $e");
     }
   }
 }

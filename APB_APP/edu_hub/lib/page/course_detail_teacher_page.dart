@@ -5,6 +5,7 @@ import 'package:edu_hub/page/main_teacher_page.dart';
 import 'package:edu_hub/services/firestore_course.dart';
 import 'package:flutter/material.dart';
 
+
 class CourseDetailTeacherPage extends StatefulWidget {
   final String courseId;
 
@@ -95,12 +96,13 @@ class _CourseDetailTeacherPageState extends State<CourseDetailTeacherPage> {
     );
   }
 
+
   @override
   void initState() {
     super.initState();
     screens = [
       CourseVideoPage(courseId: widget.courseId),
-      const CourseQuizPage(),
+      CourseQuizPage(courseId: widget.courseId,),
     ];
     _loadCourseDetails();
   }
@@ -113,6 +115,7 @@ class _CourseDetailTeacherPageState extends State<CourseDetailTeacherPage> {
       _urlGambar = course.urlGambar;  // Set URL gambar dari data course
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

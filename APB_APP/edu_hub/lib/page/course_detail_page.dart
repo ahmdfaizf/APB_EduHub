@@ -26,7 +26,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
     super.initState();
     screens = [
       CourseVideoPage(courseId: widget.courseId),
-      const CourseQuizPage(),
+      const CourseQuizPage(courseId: '',),
     ];
     _loadCourseDetails();
   }
